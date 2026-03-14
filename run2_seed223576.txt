@@ -1,0 +1,57 @@
+Enter random seed: Enter number of processes (2-10): Enter last arrival time (0-99): Enter maximum burst time (1-100): Enter RR quantum (1-100): Enter context-switch latency (0-10): 
+Processes:
+P1: arrival=5 burst=5
+P2: arrival=23 burst=2
+
+FCFS:
+@t=5, P1 selected for 5 units
+@t=23, context switch occurs
+@t=25, P2 selected for 2 units
+@t=27, all processes complete
+Completed in 27 cycles.
+Average waiting time = 1.00
+Average response time = 1.00
+
+SJF:
+@t=5, P1 selected for 5 units
+@t=23, context switch occurs
+@t=25, P2 selected for 2 units
+@t=27, all processes complete
+Completed in 27 cycles.
+Average waiting time = 1.00
+Average response time = 1.00
+
+SRTF:
+@t=5, P1 selected for 1 unit
+@t=6, P1 selected for 1 unit
+@t=7, P1 selected for 1 unit
+@t=8, P1 selected for 1 unit
+@t=9, P1 selected for 1 unit
+@t=23, context switch occurs
+@t=25, P2 selected for 1 unit
+@t=26, P2 selected for 1 unit
+@t=27, all processes complete
+Completed in 27 cycles.
+Average waiting time = 1.00
+Average response time = 1.00
+
+RR (q=4):
+@t=5, P1 selected for 4 units
+@t=9, P1 selected for 1 units
+@t=23, context switch occurs
+@t=25, P2 selected for 2 units
+@t=27, all processes complete
+Completed in 27 cycles.
+Average waiting time = 1.00
+Average response time = 1.00
+
+Random:
+@t=5, P1 selected for 5 units
+@t=23, context switch occurs
+@t=25, P2 selected for 2 units
+@t=27, all processes complete
+Completed in 27 cycles.
+Average waiting time = 1.00
+Average response time = 1.00
+
+CHECKSUM: 1135
