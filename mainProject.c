@@ -40,9 +40,10 @@ int allDone(Process p[], int n)
 	return 1;
 }
 
+// Gets the next available process to jump to it
 int nextArrival(Process p[], int n, int time)
 {
-	int min = INT_MAX;
+	int min = INT_MAX; // Max available int based on C implementation
 	for(int i=0;i<n;i++)
 		if(p[i].remaining > 0 && p[i].arrival > time && p[i].arrival < min)
 			min = p[i].arrival;
@@ -82,17 +83,21 @@ int runFCFS(Process base[], int n, int latency, double *avgWait, double *avgResp
 		int next=-1;
 		int earliest=INT_MAX;
 
-		for(int i=0;i<n;i++)
+		// Find next ready proc
+		for(int i=0;i<n;i++) {
 			if(p[i].remaining>0 && p[i].arrival<=time && p[i].arrival<earliest){
 				earliest=p[i].arrival;
 				next=i;
 			}
+		}
 
+		// Jump on idle
 		if(next==-1){
 			time = nextArrival(p,n,time);
 			continue;
 		}
 
+		// Apply context switch latency if switching from prev proc
 		if(last!=-1 && last!=next){
 			printf("@t=%d, context switch occurs\n",time);
 			time+=latency;
@@ -139,17 +144,21 @@ int runSJF(Process base[], int n, int latency, double *avgWait, double *avgResp)
 		int next=-1;
 		int best=INT_MAX;
 
-		for(int i=0;i<n;i++)
+		// Find ready proc with smallest burst time
+		for(int i=0;i<n;i++) {
 			if(p[i].remaining>0 && p[i].arrival<=time && p[i].burst<best){
 				best=p[i].burst;
 				next=i;
 			}
+		}
 
+		// Jump on idle
 		if(next==-1){
 			time = nextArrival(p,n,time);
 			continue;
 		}
 
+		// Context same as before
 		if(last!=-1 && last!=next){
 			printf("@t=%d, context switch occurs\n",time);
 			time+=latency;
@@ -196,17 +205,21 @@ int runSRTF(Process base[], int n, int latency, double *avgWait, double *avgResp
 		int best=-1;
 		int shortest=INT_MAX;
 
-		for(int i=0;i<n;i++)
+		// Find ready proc with smallest running time
+		for(int i=0;i<n;i++) {
 			if(p[i].remaining>0 && p[i].arrival<=time && p[i].remaining<shortest){
 				shortest=p[i].remaining;
 				best=i;
 			}
+		}
 
+		// Jump on idle
 		if(best==-1){
 			time = nextArrival(p,n,time);
 			continue;
 		}
 
+		// Context switch again
 		if(running!=-1 && running!=best){
 			printf("@t=%d, context switch occurs\n",time);
 			time+=latency;
@@ -217,6 +230,7 @@ int runSRTF(Process base[], int n, int latency, double *avgWait, double *avgResp
 			p[best].started=1;
 		}
 
+		// Run 1 unit preemptive
 		printf("@t=%d, P%d selected for 1 unit\n",time,p[best].pid);
 
 		p[best].remaining--;
@@ -246,7 +260,7 @@ int runRR(Process base[], int n, int q, int latency, double *avgWait, double *av
 
 	printf("\nRR (q=%d):\n", q);
 
-	int queue[100];
+	int queue[100]; // ready queue
 	int front = 0, rear = 0;
 
 	int time = 0;
@@ -254,7 +268,7 @@ int runRR(Process base[], int n, int q, int latency, double *avgWait, double *av
 
 	while(!allDone(p,n))
 	{
-		/* add newly arrived processes */
+		// add newly arrived processes
 		for(int i=0;i<n;i++){
 			if(p[i].arrival <= time && p[i].remaining > 0){
 				int alreadyQueued = 0;
@@ -266,7 +280,7 @@ int runRR(Process base[], int n, int q, int latency, double *avgWait, double *av
 			}
 		}
 
-		/* CPU idle */
+		// CPU idle jump
 		if(front == rear){
 			int next = INT_MAX;
 			for(int i=0;i<n;i++)
@@ -277,8 +291,10 @@ int runRR(Process base[], int n, int q, int latency, double *avgWait, double *av
 			continue;
 		}
 
+		// Pop from ready queue
 		int cur = queue[front++];
 
+		// Context if switching process
 		if(running != -1 && running != cur){
 			printf("@t=%d, context switch occurs\n", time);
 			time += latency;
@@ -291,13 +307,14 @@ int runRR(Process base[], int n, int q, int latency, double *avgWait, double *av
 
 		int run = p[cur].remaining < q ? p[cur].remaining : q;
 
+		// Run for quantum or remaining
 		printf("@t=%d, P%d selected for %d units\n",
 			   time, p[cur].pid, run);
 
 		time += run;
 		p[cur].remaining -= run;
 
-		/* add arrivals during execution */
+		// add arrivals during execution
 		for(int i=0;i<n;i++){
 			if(p[i].arrival > time-run && p[i].arrival <= time)
 				queue[rear++] = i;
@@ -338,14 +355,14 @@ int runRandom(Process base[], int n, int latency, double *avgWait, double *avgRe
 		int ready[MAXP];
 		int count = 0;
 
-		/* build ready list */
+		// build ready list
 		for(int i=0;i<n;i++){
 			if(p[i].remaining > 0 && p[i].arrival <= time){
 				ready[count++] = i;
 			}
 		}
 
-		/* CPU idle */
+		// CPU idle
 		if(count == 0){
 			int next = INT_MAX;
 			for(int i=0;i<n;i++){
@@ -357,7 +374,7 @@ int runRandom(Process base[], int n, int latency, double *avgWait, double *avgRe
 			continue;
 		}
 
-		/* random selection */
+		// random selection
 		int chosen = ready[rand() % count];
 
 		if(running != -1 && running != chosen){
