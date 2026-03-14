@@ -1,0 +1,106 @@
+Enter random seed: Enter number of processes (2-10): Enter last arrival time (0-99): Enter maximum burst time (1-100): Enter RR quantum (1-100): Enter context-switch latency (0-10): 
+Processes:
+P1: arrival=8 burst=9
+P2: arrival=18 burst=2
+P3: arrival=2 burst=32
+
+FCFS:
+@t=2, P3 selected for 32 units
+@t=34, context switch occurs
+@t=39, P1 selected for 9 units
+@t=48, context switch occurs
+@t=53, P2 selected for 2 units
+@t=55, all processes complete
+Completed in 55 cycles.
+Average waiting time = 22.00
+Average response time = 22.00
+
+SJF:
+@t=2, P3 selected for 32 units
+@t=34, context switch occurs
+@t=39, P2 selected for 2 units
+@t=41, context switch occurs
+@t=46, P1 selected for 9 units
+@t=55, all processes complete
+Completed in 55 cycles.
+Average waiting time = 19.67
+Average response time = 19.67
+
+SRTF:
+@t=2, P3 selected for 1 unit
+@t=3, P3 selected for 1 unit
+@t=4, P3 selected for 1 unit
+@t=5, P3 selected for 1 unit
+@t=6, P3 selected for 1 unit
+@t=7, P3 selected for 1 unit
+@t=8, context switch occurs
+@t=13, P1 selected for 1 unit
+@t=14, P1 selected for 1 unit
+@t=15, P1 selected for 1 unit
+@t=16, P1 selected for 1 unit
+@t=17, P1 selected for 1 unit
+@t=18, context switch occurs
+@t=23, P2 selected for 1 unit
+@t=24, P2 selected for 1 unit
+@t=25, context switch occurs
+@t=30, P1 selected for 1 unit
+@t=31, P1 selected for 1 unit
+@t=32, P1 selected for 1 unit
+@t=33, P1 selected for 1 unit
+@t=34, context switch occurs
+@t=39, P3 selected for 1 unit
+@t=40, P3 selected for 1 unit
+@t=41, P3 selected for 1 unit
+@t=42, P3 selected for 1 unit
+@t=43, P3 selected for 1 unit
+@t=44, P3 selected for 1 unit
+@t=45, P3 selected for 1 unit
+@t=46, P3 selected for 1 unit
+@t=47, P3 selected for 1 unit
+@t=48, P3 selected for 1 unit
+@t=49, P3 selected for 1 unit
+@t=50, P3 selected for 1 unit
+@t=51, P3 selected for 1 unit
+@t=52, P3 selected for 1 unit
+@t=53, P3 selected for 1 unit
+@t=54, P3 selected for 1 unit
+@t=55, P3 selected for 1 unit
+@t=56, P3 selected for 1 unit
+@t=57, P3 selected for 1 unit
+@t=58, P3 selected for 1 unit
+@t=59, P3 selected for 1 unit
+@t=60, P3 selected for 1 unit
+@t=61, P3 selected for 1 unit
+@t=62, P3 selected for 1 unit
+@t=63, P3 selected for 1 unit
+@t=64, P3 selected for 1 unit
+@t=65, all processes complete
+Completed in 65 cycles.
+Average waiting time = 17.67
+Average response time = 3.33
+
+RR (q=30):
+@t=2, P3 selected for 30 units
+@t=32, context switch occurs
+@t=37, P1 selected for 9 units
+@t=46, context switch occurs
+@t=51, P2 selected for 2 units
+@t=53, context switch occurs
+@t=58, P3 selected for 2 units
+@t=60, all processes complete
+Completed in 60 cycles.
+Average waiting time = 29.33
+Average response time = 20.67
+
+Random:
+@t=2, P3 selected for 32 units
+@t=34, context switch occurs
+@t=39, P1 selected for 9 units
+@t=48, context switch occurs
+@t=53, P2 selected for 2 units
+@t=55, all processes complete
+Completed in 55 cycles.
+Average waiting time = 22.00
+Average response time = 22.00
+
+CHECKSUM: 20124
