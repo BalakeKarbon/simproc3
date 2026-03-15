@@ -1,0 +1,22 @@
+
+
+Idle Period:
+Here when the process are not at the arrival time, then the cpu will idle. This can be seen at the very begginning of all of the queueing methods. P3 arrives at 2, so the CPU must idle until 2.
+From this, there is no context switching done at all. 
+
+Tie Condition:
+Here in the round robin section, there was a tie with P1 and P2, so it chose to exexcute P1 first. P1 was first in the queue so it executed first. 
+
+Preemption Event:
+
+Here in the Preemption event, at line 36 of run4_edgecase.txt, we can see that P3 was running already, however, 
+a shorter job came after and the queueing switch to P1. The same thing happens with P1 and P2, P1 is already executing
+and P2 is shorter so P1 gets kicked off in favor of P2. Here the context latency was applied right after the new process arrived. 
+
+Latency Handling:
+The Latency was applied during the switching of the tasks. This can be seen in all of the queueing methods. 
+
+
+
+
+Overall, for the extra credit, we found that when the process was idling it did not have any latency switching because all the CPU was to do was to wait for the process to get onto the CPU. Then our simulator dealt with ties. These types of ties came up within the random and the RR queueing methods, it queue the process for when ever it came first. Next, RR, SJF, and SRTF all showed how the scheduler could preemptively schedule off a process. For example, It would take off the process in SRTF in order to make sure that the CPU was processing the shortest process. Finally, the simulator handled the latency by allowing time to pass with switching processes. 
